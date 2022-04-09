@@ -9,7 +9,7 @@ const globPromise = promisify(glob);
  */
 module.exports = async (client) => {
     // Commands
-    const commandFiles = await globPromise(`${process.cwd()}src/staticbot/commands/**/*.js`);
+    const commandFiles = await globPromise(`${process.cwd()}/src/staticbot/commands/**/*.js`);
     commandFiles.map((value) => {
         const file = require(value);
         const splitted = value.split("/");
