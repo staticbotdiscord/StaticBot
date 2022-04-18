@@ -5,6 +5,6 @@ module.exports = new Command ({
     description: "returns websocket ping",
     type: 'CHAT_INPUT',
     run: async ({ client, interaction }) => {
-        interaction.followUp({ content: `${client.ws.ping}ms!` });
+        interaction.followUp({ content: `My ping is at ${client.ws.ping}ms!` });
     },
 });

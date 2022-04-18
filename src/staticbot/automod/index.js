@@ -1,0 +1,1 @@
+exports.bw = require('./bannedwords.js');

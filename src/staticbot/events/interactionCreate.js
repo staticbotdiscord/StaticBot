@@ -1,4 +1,6 @@
 const client = require("../index");
+console.log('[NODE/interactionCreate.js] Packages Imported')
+console.log('\x1b[31m',  '\n*********************************************\n*********************************************\n\nStatic Bot is now recieving Slash Commands\n\n*********************************************\n*********************************************\n\n\n\n')
 
 client.on("interactionCreate", async (interaction) => {
     // Slash Command Handling
