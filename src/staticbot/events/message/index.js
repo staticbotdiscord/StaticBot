@@ -1,1 +1,0 @@
-exports.Main = require('./main.js')
