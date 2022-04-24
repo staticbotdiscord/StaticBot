@@ -1,8 +1,12 @@
 const { Message, Client } = require("discord.js");
+const { SuccessEmbed, FailEmbed } = require('../../../lib');
 
 module.exports = {
     name: "slowmode",
     aliases: ['sm'],
+	cooldown: 10,
+	userperms: ["MANAGE_CHANNELS"],
+	botperms: ["MANAGE_CHANNELS"],
     /**
      *
      * @param {Client} client
@@ -11,16 +15,20 @@ module.exports = {
      */
     run: async (client, message, args) => {
         if (!isNaN(args[0]) || parseInt(args[0]) < 0) {
-            let embed =  new MessageEmbed()
- .setColor(ee.color)
-                .setDescription(`✅ Slowmode Enabled in ${message.channel} on Time ${args[0]}!`)
-            message.reply(embed)
+			const embed = new SuccessEmbed({
+				title: "Slowmode Enabled",
+				description: `✅ Slowmode Enabled in ${message.channel} with a time ${args[0]} seconds!`,
+				system: `Slowmode System`
+			})
+            message.reply({ embeds: [embed] })
             message.channel.setRateLimitPerUser(args[0])
         } else {
-            let embed2 =  new MessageEmbed()
- .setColor(ee.color)
-                .setDescription(`Provided Argument is Not Number`)
-            message.reply(embed2)
+			const embed = new FailEmbed({
+				title: "Usage",
+				description: `slowmode <integer(time in seconds)>`,
+				system: `Slowmode System`
+			})
+            message.reply({ embeds: [embed] })
         }
     },
 };

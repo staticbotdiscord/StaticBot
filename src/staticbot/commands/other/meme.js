@@ -4,6 +4,9 @@ const got = require("got");
 module.exports = {
     name: "meme",
     aliases: [],
+	cooldown: 5,
+	userperms: [],
+	botperms: [],
     /**
      *
      * @param {Client} client

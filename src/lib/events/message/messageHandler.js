@@ -32,7 +32,7 @@ class MessageHandler {
 		messageHandler.commands({ message: message, db: db, client: client })
 	*/
 	async commands(options) {
-		const { message, db, client } = options;
+		const { message, db, client, cooldownHandler, cooldowns } = options;
 		try {
 			let prefix = await db.fetch(`prefix_${message.guildId}`);
 			if (prefix) {
@@ -51,9 +51,44 @@ class MessageHandler {
 
     			const command = client.commands.get(cmd.toLowerCase()) || client.commands.find(c => c.aliases?.includes(cmd.toLowerCase()));
 
-    			if (!command) return;
+				if (!command) return;
+
+				if (command.userperms.length > 0 || command.botperms.length > 0) {
+					if (typeof command.userperms === 'string') {
+						command.userperms = command.userperms.split();
+						validatePermissions(command.userperms);
+					}
+
+					for(const permission of command.userperms) {
+						if(!message.member.hasPermission(permission)) {
+							return message.channel.send(
+								`<:vError:725270799124004934> Insufficient Permission! \`${permission}\` required.`,
+							);
+						}
+					}
+
+					if(typeof command.botperms === 'string') {
+						command.botperms = command.botperms.split();
+						validatePermissions(command.botperms);
+					}
+
+					for(const permission of command.botperms) {
+						if (!message.guild.me.hasPermission(permission)) {
+							return message.channel.send(
+								`<:vError:725270799124004934> Insufficient Permission! I require \`${permission}\`.`,
+							);
+						}
+					}
+				}
 				
-    			await command.run(client, message, args);
+    			cooldownHandler.cooldown({
+					message: message,
+					cooldowns: cooldowns,
+					message: message,
+					client: client,
+					args: args,
+					command: command
+				})
 			} else {
 				let standardPrefix = "!"
 				if(message.mentions.users.first()) {
@@ -71,8 +106,43 @@ class MessageHandler {
 
     			const command = client.commands.get(cmd.toLowerCase()) || client.commands.find(c => c.aliases?.includes(cmd.toLowerCase()));
 
+				if (command.userperms.length > 0 || command.botperms.length > 0) {
+					if (typeof command.userperms === 'string') {
+						command.userperms = command.userperms.split();
+						validatePermissions(command.userperms);
+					}
+
+					for(const permission of command.userperms) {
+						if(!message.member.hasPermission(permission)) {
+							return message.channel.send(
+								`<:vError:725270799124004934> Insufficient Permission! \`${permission}\` required.`,
+							);
+						}
+					}
+
+					if(typeof command.botperms === 'string') {
+						command.botperms = command.botperms.split();
+						validatePermissions(command.botperms);
+					}
+
+					for(const permission of command.botperms) {
+						if (!message.guild.me.hasPermission(permission)) {
+							return message.channel.send(
+								`<:vError:725270799124004934> Insufficient Permission! I require \`${permission}\`.`,
+							);
+						}
+					}
+				}
+				
     			if (!command) return;
-    				await command.run(client, message, args);
+    			cooldownHandler.cooldown({
+					message: message,
+					cooldowns: cooldowns,
+					message: message,
+					client: client,
+					args: args,
+					command: command
+				})
 				}
 			} catch(err) {
 			console.log(err) 

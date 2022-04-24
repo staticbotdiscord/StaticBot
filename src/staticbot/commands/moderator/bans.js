@@ -1,8 +1,12 @@
 const { Message, Client, MessageEmbed } = require("discord.js");
+const { SuccessEmbed, FailEmbed } = require('../../../lib');
 
 module.exports = {
     name: "bans",
     aliases: [],
+	cooldown: 10,
+	userperms: ["BAN_MEMBERS"],
+	botperms: [],
     /**
      *
      * @param {Client} client
@@ -10,17 +14,14 @@ module.exports = {
      * @param {String[]} args
      */
     run: async (client, message, args) => {
-		if (!message.member.permissions.has("BAN_MEMBERS")) return message.channel.send('You do not have permission to perform this command.')
-        const Banned = await message.guild.bans.fetch();
+		const Banned = await message.guild.bans.fetch();
         const bannedmembers = (Banned).map(member => `${member.user.tag}`).join(`\n`)
 
-        const embed = new MessageEmbed()
-            .setColor("GREEN")
-			.setTitle("All server bans")
-			.setAuthor({ name: "Static Bot - Ban System" })
-            .setDescription(`${bannedmembers}`)
-            .setThumbnail(message.guild.iconURL({ dynamic: true }))
-            .setFooter({ text: "Static Bot - Ban System" })
+		const embed = new SuccessEmbed({
+			title: "All server bans",
+			description: `${bannedmembers}`,
+			system: `Ban System`
+		})
 		message.channel.send({ embeds: [embed] })
     },
 };

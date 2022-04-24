@@ -1,8 +1,12 @@
 const { Message, Client } = require("discord.js");
+const { SuccessEmbed, FailEmbed } = require('../../../lib');
 
 module.exports = {
     name: "clear",
     aliases: ['purge'],
+	cooldown: 10,
+	userperms: ["MANAGE_MESSAGES"],
+	botperms: ["MANAGE_MESSAGES"],
     /**
      *
      * @param {Client} client
@@ -15,6 +19,11 @@ module.exports = {
         if(parseInt(args[0]) > 99) return message.channel.send('The max amount of messages that I can delete is 99')
         await message.channel.bulkDelete(parseInt(args[0]) + 1)
             .catch(err => console.log(err))
-        message.channel.send('Deleted ' + args[0]  + " messages.")
+		const embed = new SuccessEmbed({
+			title: "Messages Cleared",
+			description: `Deleted ${args[0]} messages.`,
+			system: `Purge System`
+		})
+        message.channel.send({ embeds: [embed] })
     },
 };

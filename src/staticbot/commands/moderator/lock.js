@@ -1,8 +1,12 @@
-const { Message, Client, MessageEmbed } = require("discord.js");
+const { Message, Client } = require("discord.js");
+const { SuccessEmbed, FailEmbed } = require('../../../lib');
 
 module.exports = {
     name: "lock",
     aliases: ['lockchannel'],
+	cooldown: 10,
+	userperms: ["MANAGE_CHANNELS"],
+	botperms: ["MANAGE_CHANNELS"],
     /**
      *
      * @param {Client} client
@@ -17,10 +21,11 @@ module.exports = {
                 deny: ['SEND_MESSAGES'],
             },
         ]);
-        const embed = new MessageEmbed()
-            .setColor("RED")
-            .setTitle("Channel Locked")
-            .setDescription(`🔒 ${message.channel} has been Locked`)
+        const embed = new SuccessEmbed({
+			title: "Channel Locked",
+			description: `🔒 ${message.channel} has been Locked`,
+			system: `Channel System`
+		})
         await message.channel.send({ embeds: [embed] })
     },
 };

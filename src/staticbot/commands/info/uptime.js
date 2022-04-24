@@ -4,6 +4,9 @@ const uptime = require('../../events/ready.js')
 module.exports = {
     name: "uptime",
     aliases: [],
+	cooldown: 10,
+	userperms: [],
+	botperms: [],
     /**
      *
      * @param {Client} client

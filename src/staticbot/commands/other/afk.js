@@ -2,6 +2,9 @@ const db = require('quick.db')
 
 module.exports = {
     name : 'afk',
+	cooldown: 5,
+	userperms: [],
+	botperms: [],
 	 /**
      *
      * @param {Client} client
