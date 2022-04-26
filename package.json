@@ -11,6 +11,7 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
+        "cjs-to-es6": "^2.0.1",
         "discord.js": "^13.2.0",
         "glob": "^7.1.7",
         "got": "^11.8.3",
