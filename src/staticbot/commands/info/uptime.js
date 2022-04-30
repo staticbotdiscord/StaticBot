@@ -1,12 +1,12 @@
-const { Message, Client } = require("discord.js");
-const uptime = require('../../events/ready.js')
+const { Message, Client } = require('discord.js');
+const uptime = require('../../events/ready.js');
 
 module.exports = {
-    name: "uptime",
+    name: 'uptime',
     aliases: [],
-	cooldown: 10,
-	userperms: [],
-	botperms: [],
+    cooldown: 10,
+    userperms: [],
+    botperms: [],
     /**
      *
      * @param {Client} client
@@ -14,6 +14,8 @@ module.exports = {
      * @param {String[]} args
      */
     run: async (client, message, args) => {
-        message.channel.send(`I have been online since <t:${Math.floor(uptime / 1000)}:R>`);
+        message.channel.send(
+            `I have been online since <t:${Math.floor(uptime / 1000)}:R>`,
+        );
     },
 };

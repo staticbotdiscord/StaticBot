@@ -1,11 +1,11 @@
-const { Message, Client } = require("discord.js");
+const { Message, Client } = require('discord.js');
 
 module.exports = {
-    name: "ping",
+    name: 'ping',
     aliases: ['p'],
-	cooldown: 10,
-	userperms: [],
-	botperms: [],
+    cooldown: 10,
+    userperms: [],
+    botperms: [],
     /**
      *
      * @param {Client} client
