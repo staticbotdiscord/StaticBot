@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('discord.js')
+const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js')
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -11,7 +11,7 @@ module.exports = {
 			fr: 'Kick le joueur spécifié.'
 		})
 		.setDMPermission(false)
-		.setDefaultMemberPermissions(PermissionsFlagsBits.BanMembers)
+		.setDefaultMemberPermissions(PermissionFlagsBits.BanMembers)
 		.addUserOption(option =>
 			option.setName('user')
 				.setNameLocalizations({
