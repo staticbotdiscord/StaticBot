@@ -11,7 +11,7 @@ module.exports = {
 			fr: 'Kick le joueur spécifié.'
 		})
 		.setDMPermission(false)
-		.setDefaultMemberPermissions(PermissionsFlagBits.BanMembers)
+		.setDefaultMemberPermissions(PermissionFlagBits.BanMembers)
 		.addUserOption(option =>
 			option.setName('user')
 				.setNameLocalizations({
