@@ -8,7 +8,7 @@ module.exports = {
 	execute(client) {
 		console.log(`Ready! Logged in as ${client.user.tag}`);
 		client.user.setPresence({
-  			activities: [{ activityName, type: activityType }],
+  			activities: [{ name: activityName, type: activityType }],
   			status: status,
 		});
 	},

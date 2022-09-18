@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('discord.js')
+const { SlashCommandBuilder, PermissionsFlagsBits } = require('discord.js')
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -10,8 +10,8 @@ module.exports = {
 		.setDescriptionLocalizations({
 			fr: 'Kick le joueur spécifié.'
 		})
-		.setDMPermission(true)
-		.setDefaultMemberPermissions()
+		.setDMPermission(false)
+		.setDefaultMemberPermissions(PermissionsFlagsBits.BanMembers)
 		.addUserOption(option =>
 			option.setName('user')
 				.setNameLocalizations({
@@ -21,18 +21,18 @@ module.exports = {
 				.setDescriptionLocalizations({
 					fr: 'L\'utilisateur à frapper.'
 				})
-				.setRequired(true)),
+				.setRequired(true))
 		.addStringOption(option =>
 			option.setName('reason')
 				.setNameLocalizations({
-					fr: 'Raison'
+					fr: 'raison'
 				})
 				.setDescription('Reason for the kick.')
 				.setDescriptionLocalizations({
 					fr: 'La raison du coup de pied.'
 				})
 				.setRequired(false)),
-	ephemeral: true,
+	ephemeral: false,
 	async execute(client, interaction, options) {
 		const locales = {
 			fr: 'Coup de pied pour!' + interaction.options.getMember('user') + '!',

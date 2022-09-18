@@ -2,6 +2,7 @@ const path = require('path')
 const { readdirSync, lstatSync } = require('fs')
 const commandsPath = path.join(__dirname, '../commands');
 const commandFiles = readdirSync(commandsPath);
+const { Routes } = require('discord.js')
 const { REST } = require('@discordjs/rest');
 const rest = new REST({ version: '10' }).setToken(process.env["TOKEN"]);
 const { clientId, guildId } = require('../../config')
@@ -16,7 +17,7 @@ const commands = (client) => {
 				if (!file1.endsWith('.js')) return;
 				const filePath1 = path.join(commandsPath, file, file1);
 				const command1 = require(filePath1);
-				client.commands.set(command1.data.name, command);
+				client.commands.set(command1.data.name, command1);
 				commands.push(command1.data.toJSON());
 			}
 		} else if (lstatSync(filePath).isFile()) {

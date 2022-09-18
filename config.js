@@ -8,9 +8,9 @@ module.exports = {
 	thinkingMessageLocales: {
 		fr: "<:StaticBot:1020974440768610355> - Static Bot pense...",
 	},
-	staff_emoji: { name: "StaticBot", id: "1020974440768610355", animated: false },
+	staffEmoji: { name: "StaticBot", id: "1020974440768610355", animated: false },
 	staff: ["700641965787709520", "814819543348281374", "482214234193788980"],
-	activityName: 'Sam sucks HEj and Hyper',
+	activityName: 'Testing.',
 	activityType: ActivityType.Streaming,
 	status: 'idle'
 }
