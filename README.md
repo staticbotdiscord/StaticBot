@@ -4,7 +4,17 @@ Static Bot is a public Discord Bot, which is designed for self hosting and custo
 
 # Table of Contents
 
-[Setup](#setup)
+### [Setup](#setup)
+
+### [Configuration](#configuration)
+
+### [Running](#running)
+
+<br>
+
+---
+
+<br>
 
 ## Setup
 
