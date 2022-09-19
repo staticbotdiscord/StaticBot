@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, PermissionsFlagsBits } = require('discord.js')
+const { SlashCommandBuilder, PermissionsFlagsBits, EmbedBuilder } = require('discord.js')
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -37,28 +37,40 @@ module.exports = {
 		const locales2 = {
 			fr: 'Je n\'ai pas la permission d\'exclure des membres'
 		}
-		if (!interaction.guild.members.me.permissions.has(PermissionsBitField.Flags.BanMembers)) return await interaction.editReply({ content: locales2[interaction.locale] ?? 'I don\'t have permission to ban members' });
+		const embed2 = new EmbedBuilder()
+			.setDescription(locales2[interaction.locale] ?? 'I don\'t have permission to ban members')
+			.setColor('RED');
+		if (!interaction.guild.members.me.permissions.has(PermissionsBitField.Flags.BanMembers)) return await interaction.editReply({ content: null, embeds: [embed2] });
 		const memberPosition = interaction.options.getMember('user').roles?.highest.rawPosition;
       	const moderationPosition = interaction.member.roles?.highest.rawPosition;
 		const myPosition = interaction.guild.member.me.roles?.highest.rawPosition;
 		const locales3 = {
 			fr: 'Votre rôle n\'est pas supérieur au rôle de la personne que vous essayez de modérer'
 		}
-		if (moderationPosition <= memberPosition) return await interaction.editReply({ content: locales3[interaction.locale] ?? 'Your role is not higher than the person you are trying to moderate\'s role'})
+		const embed3 = new EmbedBuilder()
+			.setDescription(locales3[interaction.locale] ?? 'Your role is not higher than the person you are trying to moderate\'s role')
+			.setColor('RED')
+		if (moderationPosition <= memberPosition) return await interaction.editReply({ content: null, embeds: [embed3]})
 		const locales4 = {
 			fr: 'Mon rôle le plus élevé n\'est pas supérieur au rôle le plus élevé de la personne que vous essayez de modérer'
 		}
-		if (myPosition <= memberPosition) return await interaction.editReply({ content: locales4[interaction.locale] ?? 'My highest role is not higher than the person you are trying to moderate\'s highest role' })
+		const embed4 = new EmbedBuilder()
+			.setDescription(locales4[interaction.locale] ?? 'My highest role is not higher than the person you are trying to moderate\'s highest role')
+			.setColor('RED')
+		if (myPosition <= memberPosition) return await interaction.editReply({ content: null, embeds: [embed4]})
 		const locales = {
 			fr: 'Coup de pied pour!' + interaction.options.getMember('user') + '!',
 		};
 		const locales1 = {
 			fr: 'Demandé par: '
 		}
+		const embed = new EmbedBuilder()
+			.setDescription(locales[interaction.locale] ?? 'Kicked' + interaction.options.getMember('user') + '!')
+			.setColor('GREEN')
 		const reason = interaction.options.getString('reason') ?? 'No reason specified'
 		const request = locales1[interaction.locale] ?? 'Requested by: '
 		interaction.options.getMember('user').kick(locales1 + interaction.member.tag + ' : ' + reason)
-		await interaction.editReply({ content: locales[interaction.locale] ?? 'Kicked' + interaction.options.getMember('user') + '!'})
+		await interaction.editReply({ content: null, embeds: [embed]})
 		
 	}
 }
