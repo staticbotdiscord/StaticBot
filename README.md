@@ -1,6 +1,7 @@
 # StaticBot
 
 Static Bot is a public Discord Bot, which is designed for self hosting and customizability. It was inspired by [RedBot](https://github.com/Cog-Creators/Red-DiscordBot).
+We worked hard on this, so when you use the bot you are **required** to give credit.
 
 # Table of Contents
 
@@ -24,11 +25,12 @@ Static Bot is a public Discord Bot, which is designed for self hosting and custo
    - Run `npm i @discordjs/rest@1.1.0 discord.js@14.3.0 dotenv@16.0.2` in the command line
 2. Bot Setup
 	- Head over to [Discord Developers Applications Page](https://discord.com/developers/applications) and press **New Application**. You will be prompted with a modal. Choose the name of your bot, accept the agreement and press **Create**. When you have done so go to the **Bot** tab on the left. Press **Add Bot** and say yes to the modal which you are prompted with. You may also change the name of your bot and add an profile picture here. Press reset token and gain your token. Copy it, this will be used later. Finally, go to the **oAuth2** tab and press **URL Generator** on the left. Checkmark the `bot` and `application.commands` options. You will be given a URL. This is how you add your bot to servers!
+
 ## Configuration
 
 Static Bot has many different options for configuration. To get started, open up the file '/config.js' in a text editor. Once you've opened the file, feel free to change the options!
 
-- The `token` is your bot token, this is found on the application page on [Discord Developers](https://discord.com/developers/applications). *You may type **null** if you intend on using an env named `TOKEN`*
+- The `token` is your bot token, this is found on the application page on [Discord Developers](https://discord.com/developers/applications). You may type **null** if you intend on using an env named `TOKEN`. If you plan on doing this create a file named `.env` and put `TOKEN="your-token"` in it.
 
 - The `guildId` is only to be used if you want Slash Commands to register to a single guild. If you want them to register to all guilds type **null**. Otherwise get your Guild ID by right clicking your guild and pressing **Copy id** if this option doesn't show go to User Settings -> Advanced -> Developer Mode -> Toggle On.
 

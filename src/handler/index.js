@@ -1,6 +1,6 @@
 const handler = (client) => {
-	require('./commands')(client)
-	require('./events')(client)
-}
+  require("./commands")(client);
+  require("./events")(client);
+};
 
-module.exports = handler
+module.exports = handler;
